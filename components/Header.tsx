@@ -100,16 +100,17 @@ const Header: React.FC<{ onMenuOpen: () => void }> = ({ onMenuOpen }) => {
                 {isAdminPortal ? <Shield className="w-5 h-5" /> :
                   isVendorPortal ? <Store className="w-5 h-5" /> :
                     isDeliveryPortal ? <Truck className="w-5 h-5" /> :
-                      <ShoppingCart className="w-5 h-5" />}
+                      <ShoppingBag className="w-5 h-5" />}
               </div>
-              <div className="hidden sm:block">
-                <span className="text-xl font-bold text-gray-900 tracking-tight">
-                  {isCustomerPortal ? (
-                    <>Bazaar<span className="text-green-600">Now</span></>
-                  ) : (
-                    currentConfig.title
-                  )}
+              <div className="hidden sm:block leading-tight">
+                <span className="text-xl font-extrabold text-gray-900 tracking-tight block">
+                  Bazaar<span className="text-green-600">Now</span>
                 </span>
+                {!isCustomerPortal && (
+                  <span className={`text-[10px] font-bold uppercase tracking-widest ${currentConfig.color}`}>
+                    {currentConfig.title}
+                  </span>
+                )}
               </div>
             </Link>
           </div>
@@ -146,24 +147,24 @@ const Header: React.FC<{ onMenuOpen: () => void }> = ({ onMenuOpen }) => {
                 <div className="absolute right-0 top-full mt-3 w-72 bg-white rounded-2xl shadow-xl border border-gray-100 p-2 z-50 animate-in fade-in slide-in-from-top-2 duration-200">
                   <div className="text-xs font-bold text-gray-400 px-4 py-2 uppercase tracking-wider">Select Portal</div>
 
-                  <Link to="/" onClick={() => setPortalMenuOpen(false)} className="flex items-center gap-3 px-4 py-3 hover:bg-green-50 rounded-xl transition-colors group">
-                    <div className="bg-green-100 text-green-600 p-2 rounded-lg group-hover:bg-white group-hover:shadow-sm transition-all"><ShoppingCart className="w-4 h-4" /></div>
-                    <div><p className="text-sm font-bold text-gray-900">Customer Store</p><p className="text-xs text-gray-500">Shop for groceries</p></div>
+                  <Link to="/" onClick={() => setPortalMenuOpen(false)} className={`flex items-center gap-3 px-4 py-3 rounded-xl transition-all group ${isCustomerPortal ? 'bg-green-50 ring-1 ring-green-100' : 'hover:bg-gray-50'}`}>
+                    <div className={`${isCustomerPortal ? 'bg-green-600 text-white shadow-md' : 'bg-green-100 text-green-600'} p-2 rounded-lg transition-all`}><ShoppingBag className="w-4 h-4" /></div>
+                    <div><p className={`text-sm font-bold ${isCustomerPortal ? 'text-green-700' : 'text-gray-900'}`}>Customer Store</p><p className="text-xs text-gray-500">Shop for groceries</p></div>
                   </Link>
 
-                  <Link to="/admin" onClick={() => setPortalMenuOpen(false)} className="flex items-center gap-3 px-4 py-3 hover:bg-blue-50 rounded-xl transition-colors group">
-                    <div className="bg-blue-100 text-blue-600 p-2 rounded-lg group-hover:bg-white group-hover:shadow-sm transition-all"><Shield className="w-4 h-4" /></div>
-                    <div><p className="text-sm font-bold text-gray-900">Admin Console</p><p className="text-xs text-gray-500">Manage platform</p></div>
+                  <Link to="/admin" onClick={() => setPortalMenuOpen(false)} className={`flex items-center gap-3 px-4 py-3 rounded-xl transition-all group mt-1 ${isAdminPortal ? 'bg-blue-50 ring-1 ring-blue-100' : 'hover:bg-gray-50'}`}>
+                    <div className={`${isAdminPortal ? 'bg-blue-600 text-white shadow-md' : 'bg-blue-100 text-blue-600'} p-2 rounded-lg transition-all`}><Shield className="w-4 h-4" /></div>
+                    <div><p className={`text-sm font-bold ${isAdminPortal ? 'text-blue-700' : 'text-gray-900'}`}>Admin Console</p><p className="text-xs text-gray-500">Manage platform</p></div>
                   </Link>
 
-                  <Link to="/vendor" onClick={() => setPortalMenuOpen(false)} className="flex items-center gap-3 px-4 py-3 hover:bg-orange-50 rounded-xl transition-colors group">
-                    <div className="bg-orange-100 text-orange-600 p-2 rounded-lg group-hover:bg-white group-hover:shadow-sm transition-all"><Store className="w-4 h-4" /></div>
-                    <div><p className="text-sm font-bold text-gray-900">Vendor Hub</p><p className="text-xs text-gray-500">Manage your store</p></div>
+                  <Link to="/vendor" onClick={() => setPortalMenuOpen(false)} className={`flex items-center gap-3 px-4 py-3 rounded-xl transition-all group mt-1 ${isVendorPortal ? 'bg-orange-50 ring-1 ring-orange-100' : 'hover:bg-gray-50'}`}>
+                    <div className={`${isVendorPortal ? 'bg-orange-600 text-white shadow-md' : 'bg-orange-100 text-orange-600'} p-2 rounded-lg transition-all`}><Store className="w-4 h-4" /></div>
+                    <div><p className={`text-sm font-bold ${isVendorPortal ? 'text-orange-700' : 'text-gray-900'}`}>Vendor Hub</p><p className="text-xs text-gray-500">Manage your store</p></div>
                   </Link>
 
-                  <Link to="/delivery" onClick={() => setPortalMenuOpen(false)} className="flex items-center gap-3 px-4 py-3 hover:bg-purple-50 rounded-xl transition-colors group">
-                    <div className="bg-purple-100 text-purple-600 p-2 rounded-lg group-hover:bg-white group-hover:shadow-sm transition-all"><Truck className="w-4 h-4" /></div>
-                    <div><p className="text-sm font-bold text-gray-900">Delivery Partner</p><p className="text-xs text-gray-500">Manage deliveries</p></div>
+                  <Link to="/delivery" onClick={() => setPortalMenuOpen(false)} className={`flex items-center gap-3 px-4 py-3 rounded-xl transition-all group mt-1 ${isDeliveryPortal ? 'bg-purple-50 ring-1 ring-purple-100' : 'hover:bg-gray-50'}`}>
+                    <div className={`${isDeliveryPortal ? 'bg-purple-600 text-white shadow-md' : 'bg-purple-100 text-purple-600'} p-2 rounded-lg transition-all`}><Truck className="w-4 h-4" /></div>
+                    <div><p className={`text-sm font-bold ${isDeliveryPortal ? 'text-purple-700' : 'text-gray-900'}`}>Delivery Partner</p><p className="text-xs text-gray-500">Manage deliveries</p></div>
                   </Link>
                 </div>
               )}

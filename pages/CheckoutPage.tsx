@@ -56,88 +56,67 @@ const CheckoutPage: React.FC = () => {
           <div className="w-8"></div> {/* Spacer for alignment */}
         </div>
 
-        <form onSubmit={handleSubmit} className="grid lg:grid-cols-12 gap-8 items-start">
+        <form onSubmit={handleSubmit} className="grid lg:grid-cols-12 gap-6 items-start">
 
           {/* Left Column: Forms */}
-          <div className="lg:col-span-8 space-y-6">
+          <div className="lg:col-span-8 space-y-4">
 
             {/* Delivery Details Card */}
-            <div className="bg-white p-6 sm:p-8 rounded-3xl shadow-sm border border-gray-100">
-              <h2 className="text-lg font-bold flex items-center gap-2 mb-6 text-gray-800">
+            <div className="bg-white p-5 sm:p-6 rounded-3xl shadow-sm border border-gray-100">
+              <h2 className="text-md font-bold flex items-center gap-2 mb-4 text-gray-800">
                 <MapPin className="w-5 h-5 text-green-600" /> Delivery Details
               </h2>
 
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div className="space-y-1.5">
-                  <label className="text-xs font-bold text-gray-500 uppercase ml-1">Full Name</label>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div className="space-y-1">
+                  <label className="text-[10px] font-bold text-gray-400 uppercase ml-1 tracking-wider">Full Name</label>
                   <div className="relative">
-                    <User className="absolute left-3 top-3.5 w-4 h-4 text-gray-400" />
+                    <User className="absolute left-3 top-3 w-4 h-4 text-gray-400" />
                     <input
                       type="text"
                       value={formData.name}
                       onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                      className={`w-full pl-10 pr-4 py-3 bg-gray-50 border ${errors.name ? 'border-red-500' : 'border-gray-200'} rounded-xl focus:ring-2 focus:ring-green-500 focus:bg-white outline-none transition-all`}
+                      className={`w-full pl-10 pr-4 py-2.5 bg-gray-50 border ${errors.name ? 'border-red-500' : 'border-gray-200'} rounded-xl focus:ring-2 focus:ring-green-500 focus:bg-white outline-none transition-all text-sm`}
                       placeholder="Rahul Kumar"
                     />
                   </div>
-                  {errors.name && <p className="text-xs text-red-500 font-medium ml-1">{errors.name}</p>}
+                  {errors.name && <p className="text-[10px] text-red-500 font-medium ml-1">{errors.name}</p>}
                 </div>
 
-                <div className="space-y-1.5">
-                  <label className="text-xs font-bold text-gray-500 uppercase ml-1">Phone Number</label>
+                <div className="space-y-1">
+                  <label className="text-[10px] font-bold text-gray-400 uppercase ml-1 tracking-wider">Phone Number</label>
                   <div className="relative">
-                    <Phone className="absolute left-3 top-3.5 w-4 h-4 text-gray-400" />
+                    <Phone className="absolute left-3 top-3 w-4 h-4 text-gray-400" />
                     <input
                       type="tel"
                       value={formData.phone}
                       onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                      className={`w-full pl-10 pr-4 py-3 bg-gray-50 border ${errors.phone ? 'border-red-500' : 'border-gray-200'} rounded-xl focus:ring-2 focus:ring-green-500 focus:bg-white outline-none transition-all`}
+                      className={`w-full pl-10 pr-4 py-2.5 bg-gray-50 border ${errors.phone ? 'border-red-500' : 'border-gray-200'} rounded-xl focus:ring-2 focus:ring-green-500 focus:bg-white outline-none transition-all text-sm`}
                       placeholder="9876543210"
                     />
                   </div>
-                  {errors.phone && <p className="text-xs text-red-500 font-medium ml-1">{errors.phone}</p>}
+                  {errors.phone && <p className="text-[10px] text-red-500 font-medium ml-1">{errors.phone}</p>}
                 </div>
 
-                <div className="md:col-span-2 space-y-1.5">
-                  <label className="text-xs font-bold text-gray-500 uppercase ml-1">Address</label>
+                <div className="md:col-span-2 space-y-1">
+                  <label className="text-[10px] font-bold text-gray-400 uppercase ml-1 tracking-wider">Address</label>
                   <textarea
                     value={formData.address}
                     onChange={(e) => setFormData({ ...formData, address: e.target.value })}
-                    className={`w-full p-4 bg-gray-50 border ${errors.address ? 'border-red-500' : 'border-gray-200'} rounded-xl focus:ring-2 focus:ring-green-500 focus:bg-white outline-none transition-all h-24 resize-none`}
-                    placeholder="House No, Apartment, Street name"
+                    className={`w-full p-3 bg-gray-50 border ${errors.address ? 'border-red-500' : 'border-gray-200'} rounded-xl focus:ring-2 focus:ring-green-500 focus:bg-white outline-none transition-all h-20 resize-none text-sm`}
+                    placeholder="House No, Street, Landmark"
                   ></textarea>
-                  {errors.address && <p className="text-xs text-red-500 font-medium ml-1">{errors.address}</p>}
-                </div>
-
-                <div className="space-y-1.5">
-                  <label className="text-xs font-bold text-gray-500 uppercase ml-1">Landmark (Optional)</label>
-                  <input
-                    type="text"
-                    value={formData.landmark}
-                    onChange={(e) => setFormData({ ...formData, landmark: e.target.value })}
-                    className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:ring-2 focus:ring-green-500 focus:bg-white outline-none transition-all"
-                    placeholder="Near Metro Station"
-                  />
-                </div>
-
-                <div className="space-y-1.5">
-                  <label className="text-xs font-bold text-gray-500 uppercase ml-1">City</label>
-                  <input
-                    type="text"
-                    value={formData.city}
-                    readOnly
-                    className="w-full px-4 py-3 bg-gray-100 border border-gray-200 rounded-xl text-gray-500 cursor-not-allowed"
-                  />
+                  {errors.address && <p className="text-[10px] text-red-500 font-medium ml-1">{errors.address}</p>}
                 </div>
               </div>
             </div>
 
             {/* Payment Method Card */}
-            <div className="bg-white p-6 sm:p-8 rounded-3xl shadow-sm border border-gray-100">
-              <h2 className="text-lg font-bold flex items-center gap-2 mb-6 text-gray-800">
+            <div className="bg-white p-5 sm:p-6 rounded-3xl shadow-sm border border-gray-100">
+              <h2 className="text-md font-bold flex items-center gap-2 mb-4 text-gray-800">
                 <CreditCard className="w-5 h-5 text-green-600" /> Payment Method
               </h2>
-              <div className="grid grid-cols-3 gap-3">
+              <div className="grid grid-cols-3 gap-4">
                 {[
                   { id: 'UPI', label: 'UPI / GPay', icon: <Zap className="w-5 h-5" /> },
                   { id: 'Card', label: 'Card', icon: <CreditCard className="w-5 h-5" /> },
@@ -147,7 +126,7 @@ const CheckoutPage: React.FC = () => {
                     key={method.id}
                     type="button"
                     onClick={() => setFormData({ ...formData, paymentMethod: method.id })}
-                    className={`p-4 rounded-2xl border transition-all flex flex-col items-center justify-center gap-2 h-24 ${formData.paymentMethod === method.id
+                    className={`p-3 rounded-2xl border transition-all flex flex-col items-center justify-center gap-2 h-20 ${formData.paymentMethod === method.id
                       ? 'border-green-600 bg-green-50 text-green-700 ring-1 ring-green-600'
                       : 'border-gray-200 bg-white text-gray-500 hover:border-green-200 hover:bg-green-50/50'
                       }`}
@@ -158,7 +137,6 @@ const CheckoutPage: React.FC = () => {
                 ))}
               </div>
             </div>
-
           </div>
 
           {/* Right Column: Order Summary (Sticky) */}

@@ -10,7 +10,7 @@ const StorePage: React.FC = () => {
   const { storeId } = useParams();
   const navigate = useNavigate();
   const { cart, addToCart, updateCartQuantity, getCartCount, getCartTotal, customerAuth } = useAppContext();
-  
+
   const store = STORES.find(s => s.id === storeId);
   const products = ALL_PRODUCTS.filter(p => p.storeId === storeId);
   const categories = Array.from(new Set(products.map(p => p.category)));
@@ -48,66 +48,67 @@ const StorePage: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 pb-32">
+    <div className="min-h-screen bg-gray-50 pb-20">
       {/* Sticky Header */}
-      <div className="bg-white border-b sticky top-16 z-30 transition-all duration-300">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+      <div className="bg-white/90 backdrop-blur-md border-b sticky top-16 z-30 transition-all duration-300">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3">
           <div className="flex items-center gap-4">
             <button onClick={() => navigate(-1)} className="p-2 hover:bg-gray-100 rounded-full transition-colors">
-              <ChevronLeft className="w-6 h-6" />
+              <ChevronLeft className="w-5 h-5 text-gray-600" />
             </button>
             <div className="flex-1 min-w-0">
-              <h1 className="text-xl font-bold text-gray-900 truncate">{store.name}</h1>
-              <p className="text-xs text-gray-500 flex items-center gap-1">
-                <MapPin className="w-3 h-3" /> {store.location} • <Star className="w-3 h-3 text-yellow-500 fill-yellow-500" /> {store.rating}
-              </p>
+              <h1 className="text-lg font-bold text-gray-900 truncate tracking-tight">{store.name}</h1>
+              <div className="flex items-center gap-3 text-[10px] uppercase font-bold tracking-widest text-gray-400">
+                <span className="flex items-center gap-1"><MapPin className="w-3 h-3 text-green-600" /> {store.location}</span>
+                <span className="flex items-center gap-1"><Star className="w-3 h-3 text-yellow-500 fill-yellow-500" /> {store.rating} Rating</span>
+              </div>
             </div>
             {getCartCount() > 0 && (
-              <Link to="/cart" className="flex items-center gap-2 bg-green-600 text-white px-4 py-2 rounded-xl shadow-lg hover:bg-green-700">
-                <ShoppingBag className="w-5 h-5" />
-                <span className="font-bold hidden sm:inline">₹{getCartTotal()}</span>
+              <Link to="/cart" className="flex items-center gap-2 bg-green-600 text-white px-4 py-2 rounded-xl shadow-lg hover:bg-green-700 transition-all active:scale-95">
+                <ShoppingBag className="w-4 h-4" />
+                <span className="font-bold hidden sm:inline text-sm">₹{getCartTotal()}</span>
               </Link>
             )}
           </div>
         </div>
       </div>
 
-      {/* Hero */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-6">
-        <div className="bg-white p-6 rounded-3xl border flex flex-col md:flex-row gap-8 items-center shadow-sm">
-          <div className="w-32 h-32 md:w-48 md:h-48 rounded-2xl overflow-hidden shrink-0">
-            <img src={store.image} alt={store.name} className="w-full h-full object-cover" />
+      {/* Hero - More Compact */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-4">
+        <div className="bg-white p-5 rounded-3xl border border-gray-100 flex flex-col md:flex-row gap-6 items-center shadow-sm">
+          <div className="w-24 h-24 md:w-32 md:h-32 rounded-2xl overflow-hidden shrink-0 shadow-inner">
+            <img src={store.image} alt={store.name} className="w-full h-full object-cover transform hover:scale-105 transition-transform duration-500" />
           </div>
-          <div className="flex-1 space-y-4 text-center md:text-left">
-            <h2 className="text-3xl font-bold">{store.name}</h2>
-            <div className="flex flex-wrap gap-4 justify-center md:justify-start text-sm text-gray-600">
-              <span className="flex items-center gap-1"><Clock className="w-4 h-4 text-green-600" /> 30-45 mins Delivery</span>
-              <span className="flex items-center gap-1"><Star className="w-4 h-4 text-yellow-500 fill-yellow-500" /> {store.rating} Ratings</span>
-              <span className="flex items-center gap-1"><MapPin className="w-4 h-4 text-blue-600" /> {store.location}</span>
+          <div className="flex-1 space-y-2 text-center md:text-left">
+            <h2 className="text-2xl font-extrabold text-gray-900 tracking-tight">{store.name}</h2>
+            <div className="flex flex-wrap gap-3 justify-center md:justify-start text-[10px] font-bold uppercase tracking-wider text-gray-500">
+              <span className="flex items-center gap-1 bg-green-50 px-2 py-1 rounded-md text-green-700 border border-green-100"><Clock className="w-3 h-3" /> 30-45 mins</span>
+              <span className="flex items-center gap-1 bg-yellow-50 px-2 py-1 rounded-md text-yellow-700 border border-yellow-100"><Star className="w-3 h-3 fill-yellow-500" /> {store.rating} Ratings</span>
+              <span className="flex items-center gap-1 bg-blue-50 px-2 py-1 rounded-md text-blue-700 border border-blue-100"><MapPin className="w-3 h-3" /> {store.location}</span>
             </div>
-            <p className="text-gray-500 text-sm">Best known for fresh dairy, local grains, and everyday essentials.</p>
+            <p className="text-gray-500 text-sm leading-relaxed max-w-xl">Best known for fresh dairy, local grains, and everyday essentials.</p>
           </div>
         </div>
 
-        {/* Search & Category Filter */}
-        <div className="mt-8 flex flex-col md:flex-row gap-6">
-          <div className="md:w-64 space-y-6">
-            <div className="relative">
-              <Search className="absolute left-3 top-3 w-5 h-5 text-gray-400" />
+        {/* Search & Category Filter - Tighter spacing */}
+        <div className="mt-6 flex flex-col md:flex-row gap-6">
+          <div className="md:w-56 space-y-4">
+            <div className="relative group">
+              <Search className="absolute left-3 top-2.5 w-4 h-4 text-gray-400 group-focus-within:text-green-600 transition-colors" />
               <input
                 type="text"
-                placeholder="Search products..."
+                placeholder="Filter items..."
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
-                className="w-full pl-10 pr-4 py-3 bg-white border border-gray-200 rounded-xl focus:ring-2 focus:ring-green-500 outline-none text-sm"
+                className="w-full pl-9 pr-4 py-2 bg-white border border-gray-200 rounded-xl focus:ring-4 focus:ring-green-50 focus:border-green-400 outline-none text-sm transition-all shadow-sm"
               />
             </div>
-            <div className="bg-white p-4 rounded-2xl border hidden md:block">
-              <h3 className="font-bold mb-4 text-gray-900 border-b pb-2">Categories</h3>
-              <div className="space-y-1">
+            <div className="bg-white p-3 rounded-2xl border border-gray-100 hidden md:block shadow-sm">
+              <h3 className="text-[10px] font-bold text-gray-400 uppercase tracking-widest px-2 mb-2">Categories</h3>
+              <div className="space-y-0.5">
                 <button
                   onClick={() => setSelectedCategory('All')}
-                  className={`w-full text-left px-3 py-2 rounded-lg text-sm transition-colors ${selectedCategory === 'All' ? 'bg-green-50 text-green-600 font-bold' : 'text-gray-600 hover:bg-gray-50'}`}
+                  className={`w-full text-left px-3 py-1.5 rounded-lg text-sm transition-all ${selectedCategory === 'All' ? 'bg-green-600 text-white font-bold shadow-md shadow-green-100' : 'text-gray-600 hover:bg-gray-50'}`}
                 >
                   All Items
                 </button>
@@ -115,7 +116,7 @@ const StorePage: React.FC = () => {
                   <button
                     key={cat}
                     onClick={() => setSelectedCategory(cat)}
-                    className={`w-full text-left px-3 py-2 rounded-lg text-sm transition-colors ${selectedCategory === cat ? 'bg-green-50 text-green-600 font-bold' : 'text-gray-600 hover:bg-gray-50'}`}
+                    className={`w-full text-left px-3 py-1.5 rounded-lg text-sm transition-all ${selectedCategory === cat ? 'bg-green-600 text-white font-bold shadow-md shadow-green-100' : 'text-gray-600 hover:bg-gray-50'}`}
                   >
                     {cat}
                   </button>
@@ -149,11 +150,10 @@ const StorePage: React.FC = () => {
                         <button
                           onClick={() => handleCartAction(product)}
                           disabled={!product.inStock}
-                          className={`px-4 py-1.5 rounded-lg text-sm font-bold border-2 transition-all ${
-                            product.inStock 
-                              ? 'border-green-600 text-green-600 hover:bg-green-600 hover:text-white' 
+                          className={`px-4 py-1.5 rounded-lg text-sm font-bold border-2 transition-all ${product.inStock
+                              ? 'border-green-600 text-green-600 hover:bg-green-600 hover:text-white'
                               : 'border-gray-200 text-gray-300 cursor-not-allowed'
-                          }`}
+                            }`}
                         >
                           Add
                         </button>
