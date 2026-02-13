@@ -1,0 +1,7 @@
+{
+  "name": "BazaarNow",
+  "description": "A comprehensive local grocery marketplace clone featuring multi-role dashboards (Customer, Admin, Vendor, Delivery), product search, store-specific browsing, and a seamless checkout experience focused on Hyderabad neighborhoods.",
+  "requestFramePermissions": [
+    "geolocation"
+  ]
+}
