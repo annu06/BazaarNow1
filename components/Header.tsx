@@ -96,19 +96,19 @@ const Header: React.FC<{ onMenuOpen: () => void }> = ({ onMenuOpen }) => {
             </button>
 
             <Link to={currentConfig.homeLink} className="flex items-center gap-2 group">
-              <div className={`${currentConfig.bgApp} text-white p-2 rounded-xl shadow-lg shadow-${currentConfig.bgApp.split('-')[1]}-200 transition-transform group-hover:scale-105`}>
+              <div className={`${currentConfig.bgApp} text-white p-2 rounded-xl shadow-lg transition-transform group-hover:scale-105`}>
                 {isAdminPortal ? <Shield className="w-5 h-5" /> :
                   isVendorPortal ? <Store className="w-5 h-5" /> :
-                    isDeliveryPortal ? <Truck className="w-5 h-5" /> :
+                    isDeliveryPortal ? <Truck className="w-4 h-4" /> :
                       <ShoppingBag className="w-5 h-5" />}
               </div>
-              <div className="hidden sm:block leading-tight">
-                <span className="text-xl font-extrabold text-gray-900 tracking-tight block">
+              <div className="flex flex-col leading-none">
+                <span className="text-xl font-black text-gray-900 tracking-tighter">
                   Bazaar<span className="text-green-600">Now</span>
                 </span>
                 {!isCustomerPortal && (
-                  <span className={`text-[10px] font-bold uppercase tracking-widest ${currentConfig.color}`}>
-                    {currentConfig.title}
+                  <span className={`text-[9px] font-extrabold uppercase tracking-widest ${currentConfig.color} mt-0.5`}>
+                    {currentConfig.title.split(' ')[0]} Hub
                   </span>
                 )}
               </div>
