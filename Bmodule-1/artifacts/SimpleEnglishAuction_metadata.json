@@ -1,0 +1,428 @@
+{
+	"compiler": {
+		"version": "0.8.30+commit.73712a01"
+	},
+	"language": "Solidity",
+	"output": {
+		"abi": [
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "_nftContract",
+						"type": "address"
+					},
+					{
+						"internalType": "uint256",
+						"name": "_tokenId",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "_startPrice",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "_biddingPeriod",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "nonpayable",
+				"type": "constructor"
+			},
+			{
+				"inputs": [],
+				"name": "AuctionAlreadyCancelled",
+				"type": "error"
+			},
+			{
+				"inputs": [],
+				"name": "AuctionAlreadyEnded",
+				"type": "error"
+			},
+			{
+				"inputs": [],
+				"name": "AuctionNotActive",
+				"type": "error"
+			},
+			{
+				"inputs": [],
+				"name": "AuctionNotEnded",
+				"type": "error"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "required",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "provided",
+						"type": "uint256"
+					}
+				],
+				"name": "BidTooLow",
+				"type": "error"
+			},
+			{
+				"inputs": [],
+				"name": "BidsAlreadyPlaced",
+				"type": "error"
+			},
+			{
+				"inputs": [],
+				"name": "ETHTransferFailed",
+				"type": "error"
+			},
+			{
+				"inputs": [],
+				"name": "NoBidsPlaced",
+				"type": "error"
+			},
+			{
+				"inputs": [],
+				"name": "NotSeller",
+				"type": "error"
+			},
+			{
+				"inputs": [],
+				"name": "NothingToRefund",
+				"type": "error"
+			},
+			{
+				"anonymous": false,
+				"inputs": [],
+				"name": "AuctionCancelledEvent",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": true,
+						"internalType": "address",
+						"name": "winner",
+						"type": "address"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "price",
+						"type": "uint256"
+					}
+				],
+				"name": "AuctionEnded",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": true,
+						"internalType": "address",
+						"name": "bidder",
+						"type": "address"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "amount",
+						"type": "uint256"
+					}
+				],
+				"name": "NewBid",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": true,
+						"internalType": "address",
+						"name": "bidder",
+						"type": "address"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "amount",
+						"type": "uint256"
+					}
+				],
+				"name": "RefundClaimed",
+				"type": "event"
+			},
+			{
+				"stateMutability": "payable",
+				"type": "fallback"
+			},
+			{
+				"inputs": [],
+				"name": "bid",
+				"outputs": [],
+				"stateMutability": "payable",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "cancel",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "claimRefund",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "currentTime",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "end",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "endTime",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "highestBid",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "highestBidder",
+				"outputs": [
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "minimumNextBid",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "nftContract",
+				"outputs": [
+					{
+						"internalType": "contract IERC721",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"name": "refunds",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "seller",
+				"outputs": [
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "startPrice",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "state",
+				"outputs": [
+					{
+						"internalType": "enum SimpleEnglishAuction.AuctionState",
+						"name": "",
+						"type": "uint8"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "timeRemaining",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "tokenId",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"stateMutability": "payable",
+				"type": "receive"
+			}
+		],
+		"devdoc": {
+			"kind": "dev",
+			"methods": {
+				"constructor": {
+					"params": {
+						"_biddingPeriod": "Duration of auction in seconds (e.g. 300 = 5 minutes).",
+						"_nftContract": "ERC-721 contract address of the token being auctioned.",
+						"_startPrice": "Minimum first bid in wei (e.g. 1000000000000000000 = 1 ETH).",
+						"_tokenId": "Token ID up for auction."
+					}
+				}
+			},
+			"version": 1
+		},
+		"userdoc": {
+			"kind": "user",
+			"methods": {
+				"bid()": {
+					"notice": "Place a bid.         First bid must be >= startPrice.         Every subsequent bid must exceed the current highest by >= 10 %.  Minimum next bid = highestBid + (highestBid / 10)  i.e. highestBid * 110 / 100  In Remix: enter the wei amount in the VALUE field, then click bid()."
+				},
+				"cancel()": {
+					"notice": "Seller cancels before any bids have been placed."
+				},
+				"claimRefund()": {
+					"notice": "Out-bidders withdraw their ETH at any time.         Pull pattern protects against reentrancy (AU-9)."
+				},
+				"currentTime()": {
+					"notice": "Current block timestamp — useful for computing deadlines in Remix."
+				},
+				"end()": {
+					"notice": "Settle the auction after the bidding period.         Pays the seller and transfers the NFT to the winner.         Anyone may call this once endTime has passed."
+				},
+				"minimumNextBid()": {
+					"notice": "Minimum wei required to become the new highest bidder."
+				},
+				"refunds(address)": {
+					"notice": "AU-4: out-bidder → refundable ETH"
+				},
+				"timeRemaining()": {
+					"notice": "Seconds left before the auction closes (0 if already past)."
+				}
+			},
+			"version": 1
+		}
+	},
+	"settings": {
+		"compilationTarget": {
+			"SimpleEnglishAuction.sol": "SimpleEnglishAuction"
+		},
+		"evmVersion": "paris",
+		"libraries": {},
+		"metadata": {
+			"bytecodeHash": "ipfs"
+		},
+		"optimizer": {
+			"enabled": false,
+			"runs": 200
+		},
+		"remappings": []
+	},
+	"sources": {
+		"SimpleEnglishAuction.sol": {
+			"keccak256": "0x557509997941bb768103cec9efd4b8a0c3e62f771863e33e4c176cdbfddb093f",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://a4e46f9af679bda703d8c1b9cb80fce26bb31e86d42fc8051608dc3c85a85f69",
+				"dweb:/ipfs/Qmf6KDggPq4xedZY7kgJ3yA4VQpWyHyXA2PRNnjAN2MQzQ"
+			]
+		}
+	},
+	"version": 1
+}
